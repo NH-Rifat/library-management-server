@@ -2,8 +2,9 @@ import { sendResponse } from "../../../shared/response";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { memberService } from "./member.service";
+import { catchAsync } from "../../../shared/catchAsync";
 
-const createMember = async (req: Request, res: Response) => {
+const createMember = catchAsync(async (req: Request, res: Response) => {
   const memberData = req.body;
   const member = await memberService.createMemberIntoDB(memberData);
   sendResponse(res, {
@@ -12,30 +13,30 @@ const createMember = async (req: Request, res: Response) => {
     message: "Member created successfully",
     data: member,
   });
-};
+});
 
-const getAllMembers = async (req: Request, res: Response) => {
+const getAllMembers = catchAsync(async (req: Request, res: Response) => {
   const members = await memberService.getAllMembersFromDB();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "All members fetched successfully",
+    message: "All members retrieved  successfully",
     data: members,
   });
-};
+});
 
-const getMemberById = async (req: Request, res: Response) => {
+const getMemberById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const member = await memberService.getMemberByIdFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Member fetched successfully",
+    message: "Member retrieved successfully",
     data: member,
   });
-};
+});
 
-const updateMemberById = async (req: Request, res: Response) => {
+const updateMemberById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const memberData = req.body;
   const member = await memberService.updateMemberByIdIntoDB(id, memberData);
@@ -45,9 +46,9 @@ const updateMemberById = async (req: Request, res: Response) => {
     message: "Member updated successfully",
     data: member,
   });
-};
+});
 
-const deleteMemberById = async (req: Request, res: Response) => {
+const deleteMemberById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await memberService.deleteMemberByIdFromDB(id);
   sendResponse(res, {
@@ -56,7 +57,7 @@ const deleteMemberById = async (req: Request, res: Response) => {
     message: "Member deleted successfully",
     data: result,
   });
-};
+});
 
 export const memberController = {
   createMember,

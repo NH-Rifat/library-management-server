@@ -23,12 +23,13 @@ app.use(globalErrorHandler);
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.status(httpStatus.NOT_FOUND).json({
     success: false,
-    message: "Resource not found",
-    error: {
-      statusCode: httpStatus.NOT_FOUND,
-      path: req?.originalUrl,
-      message: "Request path not found",
-    },
+    statusCode: httpStatus.NOT_FOUND,
+    message: "Request path not found",
+    // error: {
+    //   statusCode: httpStatus.NOT_FOUND,
+    //   path: req?.originalUrl,
+    //   message: "Request path not found",
+    // },
   });
 });
 

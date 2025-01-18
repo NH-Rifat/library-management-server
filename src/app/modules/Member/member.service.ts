@@ -18,10 +18,22 @@ const getMemberByIdFromDB = async (memberId: string) => {
       memberId,
     },
   });
+  if (!member) {
+    throw new Error("Member not found");
+  }
   return member;
 };
 
 const updateMemberByIdIntoDB = async (memberId: string, memberData: any) => {
+  // find the member by memberId
+  const memberById = await prisma.member.findUnique({
+    where: {
+      memberId,
+    },
+  });
+  if (!memberById) {
+    throw new Error("Member not found");
+  }
   const member = await prisma.member.update({
     where: {
       memberId,
@@ -32,6 +44,15 @@ const updateMemberByIdIntoDB = async (memberId: string, memberData: any) => {
 };
 
 const deleteMemberByIdFromDB = async (memberId: string) => {
+  // find the member by memberId
+  const memberById = await prisma.member.findUnique({
+    where: {
+      memberId,
+    },
+  });
+  if (!memberById) {
+    throw new Error("Member not found");
+  }
   const member = await prisma.member.delete({
     where: {
       memberId,

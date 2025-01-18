@@ -18,10 +18,23 @@ const getBookByIdFromDB = async (id: string) => {
       id,
     },
   });
+
+  if (!book) {
+    throw new Error("Book not found");
+  }
   return book;
 };
 
 const updateBookByIdIntoDB = async (id: string, bookData: any) => {
+  // find the book by id
+  const bookById = await prisma.book.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!bookById) {
+    throw new Error("Book not found");
+  }
   const book = await prisma.book.update({
     where: {
       id,
@@ -32,6 +45,15 @@ const updateBookByIdIntoDB = async (id: string, bookData: any) => {
 };
 
 const deleteBookByIdFromDB = async (id: string) => {
+  // find the book by id
+  const bookById = await prisma.book.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!bookById) {
+    throw new Error("Book not found");
+  }
   const book = await prisma.book.delete({
     where: {
       id,

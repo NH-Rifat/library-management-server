@@ -2,8 +2,9 @@ import { sendResponse } from "../../../shared/response";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { bookService } from "./book.service";
+import { catchAsync } from "../../../shared/catchAsync";
 
-const createBook = async (req: Request, res: Response) => {
+const createBook = catchAsync(async (req: Request, res: Response) => {
   const bookData = req.body;
   const book = await bookService.createBookIntoDB(bookData);
   sendResponse(res, {
@@ -12,9 +13,9 @@ const createBook = async (req: Request, res: Response) => {
     message: "Book created successfully",
     data: book,
   });
-};
+});
 
-const getAllBooks = async (req: Request, res: Response) => {
+const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   const books = await bookService.getAllBooksFromDB();
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -22,21 +23,20 @@ const getAllBooks = async (req: Request, res: Response) => {
     message: "Books fetched successfully",
     data: books,
   });
-};
+});
 
-const getBookById = async (req: Request, res: Response) => {
+const getBookById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const book = await bookService.getBookByIdFromDB(id);
-  console.log(book);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Book fetched successfully",
     data: book,
   });
-};
+});
 
-const updateBookById = async (req: Request, res: Response) => {
+const updateBookById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const bookData = req.body;
   const book = await bookService.updateBookByIdIntoDB(id, bookData);
@@ -46,9 +46,9 @@ const updateBookById = async (req: Request, res: Response) => {
     message: "Book updated successfully",
     data: book,
   });
-};
+});
 
-const deleteBookById = async (req: Request, res: Response) => {
+const deleteBookById = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const result = await bookService.deleteBookByIdFromDB(id);
   sendResponse(res, {
@@ -57,7 +57,7 @@ const deleteBookById = async (req: Request, res: Response) => {
     message: "Book deleted successfully",
     data: result,
   });
-};
+});
 
 export const bookController = {
   createBook,
