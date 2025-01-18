@@ -44,8 +44,8 @@ model Member {
 
 model BorrowedBook {
   borrowId        String   @id @unique @default(cuid())
-  borrowDate    DateTime
-  returnDate  DateTime
+  borrowDate    DateTime @default(now())
+  returnDate  DateTime?
   bookId       String 
   memberId     String @unique
   createdAt DateTime @default(now())
@@ -53,6 +53,19 @@ model BorrowedBook {
 
   Book Book @relation(fields: [bookId], references: [id])
   Member Member @relation(fields: [memberId], references: [memberId])
+  ReturnBook ReturnBook?
 
   @@map("borrowedBooks")
+}
+
+model ReturnBook {
+  returnId        String   @id @unique @default(cuid())
+  returnDate    DateTime @default(now())
+  borrowId       String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  BorrowedBook BorrowedBook @relation(fields: [borrowId], references: [borrowId])
+
+  @@map("returnBooks")
 }
