@@ -21,8 +21,19 @@ const getBookByIdFromDB = async (id: string) => {
   return book;
 };
 
+const updateBookByIdIntoDB = async (id: string, bookData: any) => {
+  const book = await prisma.book.update({
+    where: {
+      id,
+    },
+    data: bookData,
+  });
+  return book;
+};
+
 export const bookService = {
   createBookIntoDB,
   getAllBooksFromDB,
   getBookByIdFromDB,
+  updateBookByIdIntoDB,
 };
