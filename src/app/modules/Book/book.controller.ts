@@ -24,7 +24,20 @@ const getAllBooks = async (req: Request, res: Response) => {
   });
 };
 
+const getBookById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const book = await bookService.getBookByIdFromDB(id);
+  console.log(book);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Book fetched successfully",
+    data: book,
+  });
+};
+
 export const bookController = {
   createBook,
   getAllBooks,
+  getBookById,
 };
