@@ -6,7 +6,7 @@ export const sendResponse = <T>(
     statusCode: number;
     success: boolean;
     message: string;
-    data: T | null | undefined;
+    data?: T | null | undefined;
     meta?: {
       total: number;
       page: number;

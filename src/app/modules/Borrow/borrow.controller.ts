@@ -7,7 +7,7 @@ const createBorrowEntry = async (req: Request, res: Response) => {
   const borrowData = req.body;
   const borrow = await borrowService.insertBorrowEntryIntoDB(borrowData);
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Borrow borrowed  successfully",
     data: borrow,

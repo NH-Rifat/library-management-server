@@ -7,7 +7,7 @@ const createMember = async (req: Request, res: Response) => {
   const memberData = req.body;
   const member = await memberService.createMemberIntoDB(memberData);
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Member created successfully",
     data: member,
