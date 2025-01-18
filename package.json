@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prod": "NODE_ENV=production node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,9 +13,9 @@
   "description": "",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
-    "@types/cookie-parser": "^1.4.8",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.10.6",
     "prisma": "^6.2.1",
