@@ -22,7 +22,7 @@ The main objective of the Library Management System is to manage the details of 
 ```javascript
 npm install
 npm run build
-npm run start:dev
+npm run dev
 
 ```
 
@@ -31,7 +31,7 @@ npm run start:dev
 ```javascript
 yarn
 yarn build
-yarn start:dev
+yarn dev
 
 ```
 
